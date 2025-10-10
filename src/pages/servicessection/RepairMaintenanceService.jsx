@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import logo from '../../assets/image/website_logo.webp';
-import peopleImg from '../../assets/image/file_2025-05-21_11.02.15.png';
 
 const aboutData = {
   sectionTitle: "About INDUS",
@@ -74,7 +73,7 @@ const RepairMaintenanceService = () => {
 
             <div className="row-span-2 overflow-hidden">
               <img
-                src={peopleImg}
+                src="http://209.182.233.237/images/randm5.jpg"
                 alt="Team"
                 className="w-full h-full object-cover shadow-md"
                 loading="lazy"

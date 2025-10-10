@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useViewportScroll, useTransform, animate } from 'framer-motion';
-import bgVideo from '../../assets/image/manpower.mp4';
 import logo from '../../assets/image/website_logo.webp';
 
 const ProductsHero = () => {
@@ -48,9 +47,10 @@ const ProductsHero = () => {
                 loop
                 muted
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover z-0"
+                className="absolute inset-0 w-full h-full object-cover z-0 scale-150"
+                style={{ transformOrigin: 'center center' }}
             >
-                <source src={bgVideo} type="video/mp4" />
+                <source src="http://209.182.233.237/videos/servicesproducts.mp4" type="video/mp4" />
             </video>
 
             <div

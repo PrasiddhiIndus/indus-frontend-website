@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
-import peopleImg from '../assets/image/IndusHighres_0046.jpg';
-import img1 from '../assets/image/IndusHighres_0046.jpg';
-import img2 from '../assets/image/VHP06653_done.jpg';
-import img3 from '../assets/image/VHP06653_done.jpg';
+// import peopleImg from '../assets/image/IndusHighres_0046.jpg';
+// import img1 from '../assets/image/IndusHighres_0046.jpg';
+// import img2 from '../assets/image/VHP06653_done.jpg';
+// import img3 from '../assets/image/VHP06653_done.jpg';
 import ServicesProvider from './servicessection/ServicesProvider';
 import ServicesMarkets from './servicessection/ServicesMarkets';
 import RepairMaintenanceHero from './servicessection/RepairMaintenanceHero';
 import RepairMaintenanceService from './servicessection/RepairMaintenanceService';
 import ServicesContact from './servicessection/ServicesContact';
 
-const manpowerImages = [img1, img2, img3];
+// const manpowerImages = [img1, img2, img3];
 const manpowerDescription =
 "Repair & Maintenance services across industries, ensuring operational reliability and safety. Our skilled teams handle industrial systems, emergency response equipment, and critical infrastructure with precision and expertise.";
 
@@ -58,9 +58,9 @@ const RepairMaintenance = () => {
       <RepairMaintenanceHero />
       <RepairMaintenanceService />
       <ServicesProvider title="Repair & Maintenance Services Provider" services={services} />
-      <ServicesMarkets title="Repair & Maintenance Markets"
+      {/* <ServicesMarkets title="Repair & Maintenance Markets"
         description={manpowerDescription}
-        images={manpowerImages} />
+        images={[]} /> */}
       <ServicesContact />
 
     </div>

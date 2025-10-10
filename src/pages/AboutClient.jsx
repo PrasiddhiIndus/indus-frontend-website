@@ -93,7 +93,7 @@ const AboutClients = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Grid of Client Logos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 place-items-center">
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10">
           {clientLogos.map((logo, index) => (
             <motion.div
               key={index}
@@ -101,12 +101,12 @@ const AboutClients = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-zinc-900/40 to-black/60 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-sm hover:shadow-[#FF0000]/30 transition-all duration-300"
+              className="bg-white backdrop-blur-sm border border-gray-200 rounded-xl p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-[#FF0000]/30 transition-all duration-300 flex-shrink-0"
             >
               <img
                 src={logo}
                 alt={`Client ${index + 1}`}
-                className="w-full h-16 object-contain"
+                className="w-20 h-12 sm:w-24 sm:h-16 md:w-28 md:h-18 object-contain"
               />
             </motion.div>
           ))}

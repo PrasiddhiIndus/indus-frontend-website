@@ -84,9 +84,22 @@ const NewVentures = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className={`${
+          ventures.length === 1 ? 'flex justify-center' :
+          ventures.length === 2 ? 'grid grid-cols-1 sm:grid-cols-2 gap-10 justify-items-center' :
+          ventures.length === 3 ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10' :
+          ventures.length === 4 ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10' :
+          ventures.length >= 5 ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10' :
+          'flex justify-center'
+        }`}>
           {ventures.map((post, index) => (
-            <BlogCard key={post.id || index} post={post} />
+            <div key={post.id || index} className={`${
+              ventures.length === 1 ? 'max-w-sm mx-auto' :
+              ventures.length === 2 ? 'max-w-sm' :
+              'w-full'
+            }`}>
+              <BlogCard post={post} />
+            </div>
           ))}
         </div>
       </div>

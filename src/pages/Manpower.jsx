@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
-import { motion } from 'framer-motion';
-import { Users, Award, Clock, Shield, CheckCircle } from 'lucide-react';
 import ManpowerHero from './servicessection/ManpowerHero';
 import ManpowerServices from './servicessection/ManpowerServices';
 import ServicesProvider from './servicessection/ServicesProvider';
-import peopleImg from '../assets/image/IndusHighres_0046.jpg';
-import ServicesMarkets from './servicessection/ServicesMarkets';
-import img1 from '../assets/image/IndusHighres_0046.jpg';
-import img2 from '../assets/image/VHP06653_done.jpg';
-import img3 from '../assets/image/VHP06653_done.jpg';
 import ServicesContact from './servicessection/ServicesContact';
 
-const manpowerImages = [img1, img2, img3];
-const manpowerDescription =
-"Manpower Services deliver certified and highly trained fire and safety professionals to India’s core industries, including oil & gas, petrochemicals, ports, power plants, logistics, and infrastructure. Our workforce comprises skilled firemen, safety officers, HSE supervisors, and emergency response teams, experienced in handling operations, shutdowns, and high-risk environments. Backed by ISO and NFPA-compliant training, they ensure fire watch, risk assessment, equipment monitoring, safety compliance, and 24/7 emergency readiness. Designed to safeguard lives and assets, our manpower solutions enhance workplace safety, minimize downtime, and support uninterrupted industrial operations."
+// Commented out unused imports and variables
+// import { motion } from 'framer-motion';
+// import { Users, Award, Clock, Shield, CheckCircle } from 'lucide-react';
+// import peopleImg from '../assets/image/IndusHighres_0046.jpg';
+// import ServicesMarkets from './servicessection/ServicesMarkets';
+// import img1 from '../assets/image/IndusHighres_0046.jpg';
+// import img2 from '../assets/image/VHP06653_done.jpg';
+// import img3 from '../assets/image/VHP06653_done.jpg';
+
+// const manpowerImages = [img1, img2, img3];
+// const manpowerDescription =
+// "Manpower Services deliver certified and highly trained fire and safety professionals to India's core industries, including oil & gas, petrochemicals, ports, power plants, logistics, and infrastructure. Our workforce comprises skilled firemen, safety officers, HSE supervisors, and emergency response teams, experienced in handling operations, shutdowns, and high-risk environments. Backed by ISO and NFPA-compliant training, they ensure fire watch, risk assessment, equipment monitoring, safety compliance, and 24/7 emergency readiness. Designed to safeguard lives and assets, our manpower solutions enhance workplace safety, minimize downtime, and support uninterrupted industrial operations."
 
 // const manpowerServices = [
 //   {
@@ -99,9 +101,9 @@ const Manpower = () => {
       <ManpowerHero />
       <ManpowerServices />
       <ServicesProvider title="Manpower Services Provider" services={services} />
-      <ServicesMarkets title="Manpower Markets"
+      {/* <ServicesMarkets title="Manpower Markets"
         description={manpowerDescription}
-        images={manpowerImages} />
+        images={manpowerImages} /> */}
       <ServicesContact />
 
     </div>

@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 
 const stats = [
   { number: 500, suffix: '+', label: 'Projects Completed' },
-  { number: 50, suffix: '+', label: 'Expert Team Members' },
+  { number: 2500, suffix: '+', label: 'People Deployed across India' },
   { number: 32, suffix: '+', label: 'Years Experience' },
   { number: 100, suffix: '+', label: 'Trusted Clients' }
 ];

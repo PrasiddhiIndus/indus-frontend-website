@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useViewportScroll, useTransform, animate } from 'framer-motion';
-import bgVideo from '../../assets/image/manpower.mp4';
 import logo from '../../assets/image/website_logo.webp';
 
 const TrainingHero = () => {
@@ -45,15 +44,16 @@ const TrainingHero = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden select-none">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src={bgVideo} type="video/mp4" />
-      </video>
+       <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover z-0 scale-150"
+                style={{ transformOrigin: 'center center' }}
+            >
+                <source src="http://209.182.233.237/videos/servicestraining.mp4" type="video/mp4" />
+            </video>
 
       <div
         aria-hidden="true"

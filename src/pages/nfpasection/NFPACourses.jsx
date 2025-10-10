@@ -5,8 +5,8 @@ import { Shield, Clock, CheckCircle, Lock } from 'lucide-react';
 import { scroller } from 'react-scroll';
 
 const NFPACourses = ({ courses }) => {
-  const scrollToCTA = () => {
-    scroller.scrollTo('cta-section', {
+  const scrollToBatches = () => {
+    scroller.scrollTo('batches-section', {
       duration: 800,
       delay: 0,
       smooth: 'easeInOutQuart',
@@ -26,7 +26,13 @@ const NFPACourses = ({ courses }) => {
         </div>
 
         {/* Course Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className={`${
+          courses.length === 1 
+            ? 'flex justify-center' 
+            : courses.length === 2 
+            ? 'grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center' 
+            : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+        }`}>
           {courses.map((course, index) => {
             const isComingSoon = course.status === 'coming_soon';
 
@@ -36,7 +42,7 @@ const NFPACourses = ({ courses }) => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative bg-[#0f0f0f]/90 backdrop-blur-sm border border-gray-800 rounded-xl p-6 transition-all duration-300 ${
+                className={`relative bg-[#0f0f0f]/90 backdrop-blur-sm border border-gray-800 rounded-xl p-6 transition-all duration-300 max-w-sm mx-auto ${
                   isComingSoon ? 'opacity-60 pointer-events-none' : 'hover:border-red-500/50'
                 }`}
               >
@@ -79,7 +85,7 @@ const NFPACourses = ({ courses }) => {
                     <span className="text-2xl font-bold text-[#ff0000]">{course.price}</span>
                   )}
                   <button
-                    onClick={scrollToCTA}
+                    onClick={scrollToBatches}
                     disabled={isComingSoon}
                     className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                       isComingSoon

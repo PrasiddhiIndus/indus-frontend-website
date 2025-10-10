@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import logo from '../../assets/image/website_logo.webp';
-import peopleImg from '../../assets/image/file_2025-05-21_11.02.15.png';
+
 
 const aboutData = {
   sectionTitle: "Fire Truck Manufacturing",
@@ -54,7 +54,7 @@ const TrucksServices = () => {
         >
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Services <span className={aboutData.highlightColor}>Man Power</span>
+            <span className={aboutData.highlightColor}>Truck</span> Services 
             </h2>
             <p className="text-gray-300 mb-4">{aboutData.description}</p>
           </div>
@@ -72,7 +72,7 @@ const TrucksServices = () => {
 
             <div className="row-span-2 overflow-hidden">
               <img
-                src={peopleImg}
+                src="http://209.182.233.237/images/trucks10.png"
                 alt="Team"
                 className="w-full h-full object-cover shadow-md"
                 loading="lazy"

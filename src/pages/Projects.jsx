@@ -4,9 +4,10 @@ import ProjectsHero from './servicessection/ProjectsHero';
 import ProjectServices from './servicessection/ProjectServices';
 import ServicesProvider from './servicessection/ServicesProvider';
 import ServicesMarkets from './servicessection/ServicesMarkets';
-import img1 from '../assets/image/IndusHighres_0046.jpg';
-import img2 from '../assets/image/VHP06653_done.jpg';
-import img3 from '../assets/image/VHP06653_done.jpg';
+// Updated to use external URLs
+const img1 = 'http://209.182.233.237/images/projects10.png';
+const img2 = 'http://209.182.233.237/images/projects12.png';
+const img3 = 'http://209.182.233.237/images/projects13.png';
 import ServicesContact from './servicessection/ServicesContact';
 
 const projectsImagesMarkets = [img1, img2, img3];

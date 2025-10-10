@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import AboutImage from '../../assets/image/IndusHighres_0046.jpg';
+
 
 const HomeAbout = () => {
     return (
@@ -35,16 +35,17 @@ const HomeAbout = () => {
                 </motion.div>
 
                 <motion.div
+
                     initial={{ opacity: 0, x: 40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
                     className="flex-1 w-full"
                 >
-                    <div className="w-full h-full rounded-lg overflow-hidden shadow-lg border border-white/10 backdrop-blur-md">
+                    <div className="w-full h-[500px] md:h-[600px] rounded-lg overflow-hidden shadow-lg border border-white/10 backdrop-blur-md">
                         <img
-                            src={AboutImage}
+                            src="http://209.182.233.237/images/hometeam.jpeg"
                             alt="About Us"
-                            className="w-full h-auto object-cover rounded-lg"
+                            className="w-full h-full object-cover rounded-lg"
                         />
                     </div>
                 </motion.div>
