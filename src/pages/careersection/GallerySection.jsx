@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Camera } from 'lucide-react';
 
 const galleryImages = [
-  "http://209.182.233.237/images/careers1.jpg",
+  "http://209.182.233.237/images/careers1.JPG",
   "http://209.182.233.237/images/careers2.jpg",
   "http://209.182.233.237/images/careers3.jpg",
   "http://209.182.233.237/images/careers4.jpg",

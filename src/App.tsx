@@ -20,11 +20,10 @@ function App() {
     <div className="bg-black text-white">
       <Router>
         <Routes>
-        
           <Route path="/*" element={
             <>
               <Navbar />
-              <main >
+              <main>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/manpower" element={<Manpower />} />
@@ -32,12 +31,14 @@ function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/training" element={<Training />} />
-                  <Route path="/repair-maintenance" element={<RepairMaintenance/>} />
+                  <Route path="/repair-maintenance" element={<RepairMaintenance />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/nfpa" element={<NFPA />} />
                   <Route path="/careers" element={<Careers />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/contact" element={<Contact />} />
+                  {/* Catch-all route for 404 handling */}
+                  <Route path="*" element={<Home />} />
                 </Routes>
               </main>
               <Footer />
@@ -49,8 +50,8 @@ function App() {
           toastOptions={{
             style: {
               background: '#1e293b',
-              color: '#white',
-              border: 'px solid #334155',
+              color: '#ffffff',
+              border: '1px solid #334155',
             },
           }}
         />
