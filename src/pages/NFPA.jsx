@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { supabase } from '../utils/supabaseClient';
 import NFPAHero from './nfpasection/NFPAHero';
 import NFPACourses from './nfpasection/NFPACourses';
 import NFPABatches from './nfpasection/NFPABatches';
 import NFPANews from './nfpasection/NFPANews';
 import NFPACTA from './nfpasection/NFPACTA';
+import LoadingSpinner from '../components/LoadingSpinner';
+import LazyLoadWrapper from '../components/LazyLoadWrapper';
+
+// Lazy load the gallery component
+const NFPAGallery = lazy(() => import('./nfpasection/NFPAGallery'));
 
 const NFPA = () => {
   const [courses, setCourses] = useState([]);
@@ -49,6 +54,7 @@ const NFPA = () => {
         course: batch.nfpa_courses?.title || 'Unknown',
         startDate: batch.start_date,
         endDate: batch.end_date,
+        status: batch.status || 'open', // Ensure status field is included
       }));
 
       setBatches(mappedBatches);
@@ -74,6 +80,18 @@ const NFPA = () => {
       <NFPAHero />
       {!loadingCourses && <NFPACourses courses={courses} />}
       <NFPABatches batches={batches} />
+      
+      {/* Lazy loaded gallery section */}
+      <LazyLoadWrapper 
+        fallback={<LoadingSpinner text="Loading gallery..." size="large" />}
+        threshold={0.2}
+        rootMargin="100px"
+      >
+        <Suspense fallback={<LoadingSpinner text="Preparing gallery..." size="large" />}>
+          <NFPAGallery />
+        </Suspense>
+      </LazyLoadWrapper>
+      
       <NFPANews news={latestNews} />
       <NFPACTA />
     </div>

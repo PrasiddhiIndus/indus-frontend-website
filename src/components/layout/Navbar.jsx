@@ -114,7 +114,7 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
               >
                 {item.external ? (
                   <a
-                    href="https://lms.example.com"
+                    href="https://induslms.netlify.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-1 text-gray-300 hover:text-white transition-colors duration-200"
@@ -191,7 +191,7 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
                   <div key={item.name}>
                     {item.external ? (
                       <a
-                        href="https://lms.example.com"
+                        href="https://induslms.netlify.app/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-md transition-all duration-200"

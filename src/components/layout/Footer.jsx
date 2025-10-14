@@ -40,16 +40,16 @@ const Footer = () => {
               Providing fire safety, manpower, training, and emergency response solutions across India with commitment and compliance.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
+              <a href="https://facebook.com/indusfiresafety" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
+              <a href="https://twitter.com/indusfiresafety" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
+              <a href="https://linkedin.com/company/indus-fire-safety" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
                 <LinkedIn className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
+              <a href="https://instagram.com/indusfiresafety" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#FF0000] transition-colors duration-200">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -59,16 +59,36 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              {['Home', 'About', 'nfpa', 'Products', 'Careers', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link
-                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/nfpa" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  NFPA Training
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/careers" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -76,20 +96,36 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                'Manpower Solutions',
-                'Equipment Rental',
-                'Project Management',
-                'NFPA Certified Training',
-                'Repair & Maintenance',
-                'Truck Manufacturing'
-              ].map((service) => (
-                <li key={service}>
-                  <span className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer">
-                    {service}
-                  </span>
-                </li>
-              ))}
+              <li>
+                <Link to="/manpower" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Manpower Solutions
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Equipment Rental
+                </Link>
+              </li>
+              <li>
+                <Link to="/projects" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Project Management
+                </Link>
+              </li>
+              <li>
+                <Link to="/nfpa" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  NFPA Certified Training
+                </Link>
+              </li>
+              <li>
+                <Link to="/repair-maintenance" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Repair & Maintenance
+                </Link>
+              </li>
+              <li>
+                <Link to="/trucks" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Truck Manufacturing
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -122,12 +158,12 @@ const Footer = () => {
             © 2025 Indus Fire Safety Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link className="text-gray-400 hover:text-white transition-colors duration-200">
+            <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200">
               Privacy Policy
-            </Link>
-            <Link to="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+            </a>
+            <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors duration-200">
               Terms of Service
-            </Link>
+            </a>
             {/* Website Credit */}
             <p className="text-gray-400 text-xs md:text-sm mt-1 md:mt-0">
               Website by- {' '}

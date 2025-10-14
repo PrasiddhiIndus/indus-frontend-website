@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 
 
 const galleryImages = [
-  'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg',
-  'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg',
-  'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
-  'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg',
-  'https://images.pexels.com/photos/3184419/pexels-photo-3184419.jpeg',
-  'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg'
+  "http://209.182.233.237/images/careers1.jpg",
+  "http://209.182.233.237/images/careers2.jpg",
+  "http://209.182.233.237/images/careers3.jpg",
+  "http://209.182.233.237/images/careers4.jpg",
+  "http://209.182.233.237/images/careers5.jpg",
+  "http://209.182.233.237/images/careers6.jpg"
 ];
 
 const EventsSection = () => (

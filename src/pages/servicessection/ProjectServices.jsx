@@ -55,7 +55,7 @@ const ProjectServices = () => {
         >
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Services <span className={aboutData.highlightColor}>Projects</span>
+            <span className={aboutData.highlightColor}>Projects</span> Services 
             </h2>
             <p className="text-gray-300 mb-4">{aboutData.description}</p>
           </div>

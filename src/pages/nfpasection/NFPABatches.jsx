@@ -14,7 +14,7 @@ const NFPABatches = ({ batches }) => {
   const today = new Date();
 
   return (
-    <section className="py-10 sm:py-14 md:py-16 bg-black">
+    <section id="batches-section" className="py-10 sm:py-14 md:py-16 bg-black">
       {/* Scrollbar Custom Styling */}
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
@@ -43,18 +43,18 @@ const NFPABatches = ({ batches }) => {
 
         {/* Scroll container with horizontal scroll */}
         <div className="w-full overflow-x-auto custom-scrollbar">
-          <div className="min-w-[700px] bg-[#0f0f0f]/90 backdrop-blur border border-gray-800 rounded-xl overflow-hidden">
+          <div className="min-w-[800px] bg-[#0f0f0f]/90 backdrop-blur border border-gray-800 rounded-xl overflow-hidden">
             {/* Table header */}
             <table className="w-full table-fixed text-xs sm:text-sm md:text-base border-collapse">
               <thead className="bg-gray-900/80 sticky top-0 z-10">
                 <tr>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">Course</th>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">Start Date</th>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">End Date</th>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">Location</th>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">Seats</th>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">Instructor</th>
-                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap">Action</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[25%]">Course</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[12%]">Start Date</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[12%]">End Date</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[15%]">Location</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[10%]">Seats</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[16%]">Instructor</th>
+                  <th className="px-4 py-3 text-left text-white font-medium whitespace-nowrap w-[10%]">Action</th>
                 </tr>
               </thead>
             </table>
@@ -66,20 +66,44 @@ const NFPABatches = ({ batches }) => {
                   {batches.map((batch, index) => {
                     const batchEndDate = new Date(batch.endDate);
                     const isEnded = today > batchEndDate;
+                    // Check if batch is explicitly closed or has ended
+                    const isClosed = batch.status === 'closed' || isEnded;
+                    
+                    // Format dates from yyyy-mm-dd to dd-mm-yyyy
+                    const formatDate = (dateString) => {
+                      if (!dateString) return '';
+                      const date = new Date(dateString);
+                      const day = String(date.getDate()).padStart(2, '0');
+                      const month = String(date.getMonth() + 1).padStart(2, '0');
+                      const year = date.getFullYear();
+                      return `${day}-${month}-${year}`;
+                    };
+                    
+                    // Debug logging (remove in production)
+                    console.log('Batch data:', { 
+                      course: batch.course, 
+                      status: batch.status, 
+                      isClosed, 
+                      isEnded 
+                    });
 
                     return (
                       <tr
                         key={index}
                         className="hover:bg-gray-800/40 transition-colors duration-200"
                       >
-                        <td className="px-4 py-3 text-gray-300 font-medium whitespace-nowrap">{batch.course}</td>
-                        <td className="px-4 py-3 text-gray-300 whitespace-nowrap">{batch.startDate}</td>
-                        <td className="px-4 py-3 text-gray-300 whitespace-nowrap">{batch.endDate}</td>
-                        <td className="px-4 py-3 text-gray-300 whitespace-nowrap">{batch.location}</td>
-                        <td className="px-4 py-3 text-gray-300 whitespace-nowrap">{batch.seats} available</td>
-                        <td className="px-4 py-3 text-gray-300 whitespace-nowrap">{batch.instructor}</td>
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          {isEnded ? (
+                        <td className="px-4 py-3 text-gray-300 font-medium w-[25%]">
+                          <div className="truncate" title={batch.course}>
+                            {batch.course}
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-gray-300 w-[12%] whitespace-nowrap">{formatDate(batch.startDate)}</td>
+                        <td className="px-4 py-3 text-gray-300 w-[12%] whitespace-nowrap">{formatDate(batch.endDate)}</td>
+                        <td className="px-4 py-3 text-gray-300 w-[15%] whitespace-nowrap">{batch.location}</td>
+                        <td className="px-4 py-3 text-gray-300 w-[10%] whitespace-nowrap">{batch.seats} available</td>
+                        <td className="px-4 py-3 text-gray-300 w-[16%] whitespace-nowrap">{batch.instructor}</td>
+                        <td className="px-4 py-3 w-[10%] whitespace-nowrap">
+                          {isClosed ? (
                             <button
                               disabled
                               className="bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-xs sm:text-sm font-medium cursor-not-allowed"

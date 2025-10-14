@@ -33,7 +33,7 @@ const NFPACTA = () => {
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold">
-            Ready to Join the <span className="text-[#ff0000]">First Batch?</span>
+            Ready to Join the <span className="text-[#ff0000]">the NFPA Batch?</span>
           </h2>
           <p className="text-gray-400 text-lg mt-4">
             Take the first step towards your IFSAC certification

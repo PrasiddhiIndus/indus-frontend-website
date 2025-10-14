@@ -7,4 +7,27 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    port: 3000,
+    host: true,
+    // Enable SPA routing for development
+    historyApiFallback: true,
+  },
+  preview: {
+    port: 3000,
+    host: true,
+    // Enable SPA routing for preview
+    historyApiFallback: true,
+  },
+  build: {
+    // Ensure proper asset handling for production
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 });

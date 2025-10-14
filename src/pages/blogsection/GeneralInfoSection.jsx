@@ -70,9 +70,22 @@ const GeneralInfoSection = () => {
           <Info className="w-8 h-8 text-[#ff0000] mr-3" />
           <h2 className="text-4xl font-bold text-white">General Information</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className={`${
+          generalInfo.length === 1 ? 'flex justify-center' :
+          generalInfo.length === 2 ? 'grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center' :
+          generalInfo.length === 3 ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' :
+          generalInfo.length === 4 ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8' :
+          generalInfo.length >= 5 ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' :
+          'flex justify-center'
+        }`}>
           {generalInfo.map((post) => (
-            <InfoCard key={post.id} post={post} />
+            <div key={post.id} className={`${
+              generalInfo.length === 1 ? 'max-w-sm mx-auto' :
+              generalInfo.length === 2 ? 'max-w-sm' :
+              'w-full'
+            }`}>
+              <InfoCard post={post} />
+            </div>
           ))}
         </div>
       </div>

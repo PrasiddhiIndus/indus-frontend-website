@@ -3,13 +3,13 @@ import { supabase } from '../utils/supabaseClient';
 import ServicesProvider from "./servicessection/ServicesProvider";
 import TrucksHero from "./servicessection/TrucksHero";
 import TrucksServices from "./servicessection/TrucksServices";
-import img1 from '../assets/image/IndusHighres_0046.jpg';
-import img2 from '../assets/image/VHP06653_done.jpg';
-import img3 from '../assets/image/VHP06653_done.jpg';
 import peopleImg from '../assets/image/IndusHighres_0046.jpg';
 import ServicesMarkets from "./servicessection/ServicesMarkets";
 import ServicesContact from './servicessection/ServicesContact';
 
+const img1 = 'http://209.182.233.237/images/trucks11.png';
+const img2 = 'http://209.182.233.237/images/trucks12.png';
+const img3 = 'http://209.182.233.237/images/trucks13.png';
 
 const trucksImagesMarkets = [img1, img2, img3];
 const TrucksDescriptionMarkets =
