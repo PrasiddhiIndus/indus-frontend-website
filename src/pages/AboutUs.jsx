@@ -12,9 +12,8 @@ const values = [
   },
   {
     icon: Award,
-    title: 'Excellence',
-    description:
-      'Delivering superior quality in fire manpower, vehicle manufacturing, training, and turnkey projects, guided by ISO certifications and NFPA-aligned standards.',
+    title: 'Vision',
+    description:'To be a global leader in fire safety solutions, delivering exceptional quality in manpower, vehicle manufacturing, training, and turnkey projects, while adhering to ISO certifications and aligning with NFPA standards to ensure safety, innovation, and reliability.',
     image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg',
   },
   {

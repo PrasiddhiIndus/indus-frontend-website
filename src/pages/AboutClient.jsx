@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import client1 from '../assets/image/Client Logos/adani.png'
 import client2 from '../assets/image/Client Logos/bajaj.png'
 import client3 from '../assets/image/Client Logos/bina.png'
@@ -72,6 +72,37 @@ const clientLogos = [
 ];
 
 const AboutClients = () => {
+  const [selectedLogo, setSelectedLogo] = useState(null);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedLogo(null);
+        return;
+      }
+      if (selectedLogo !== null) {
+        if (e.key === 'ArrowRight') {
+          setSelectedLogo((prev) => (prev === null ? 0 : (prev + 1) % clientLogos.length));
+        } else if (e.key === 'ArrowLeft') {
+          setSelectedLogo((prev) => (prev === null ? 0 : (prev - 1 + clientLogos.length) % clientLogos.length));
+        }
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [selectedLogo]);
+
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    if (selectedLogo !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = originalOverflow || '';
+    }
+    return () => {
+      document.body.style.overflow = originalOverflow || '';
+    };
+  }, [selectedLogo]);
   return (
     <section id="clients" className="py-24 bg-black relative overflow-hidden">
       {/* Background Glow Effects */}
@@ -101,7 +132,8 @@ const AboutClients = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               whileHover={{ scale: 1.05 }}
-              className="bg-white backdrop-blur-sm border border-gray-200 rounded-xl p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-[#FF0000]/30 transition-all duration-300 flex-shrink-0"
+              className="relative bg-white cursor-pointer select-none backdrop-blur-sm border border-gray-200 rounded-xl p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-[#FF0000]/30 transition-all duration-300 flex-shrink-0"
+              onClick={() => setSelectedLogo(index)}
             >
               <img
                 src={logo}
@@ -112,6 +144,55 @@ const AboutClients = () => {
           ))}
         </div>
       </div>
+      {/* Click Popup (centered, animated, attractive UI) */}
+      <AnimatePresence>
+        {typeof window !== 'undefined' && selectedLogo !== null && (
+          <div
+            className="fixed inset-0 z-30 flex items-center justify-center p-4"
+            onClick={() => setSelectedLogo(null)}
+          >
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            {/* Panel */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-[#ff7a7a] via-[#ff0000] to-[#7a0000] shadow-[0_10px_40px_rgba(255,0,0,0.25)]">
+                <div className="relative rounded-2xl bg-white/95 backdrop-blur-md p-3 md:p-4 w-[340px] md:w-[520px] h-[260px] md:h-[360px] max-w-[90vw] max-h-[80vh] overflow-hidden">
+                  <button
+                    aria-label="Close"
+                    className="absolute top-2 right-2 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-800 shadow-md border border-gray-200 hover:bg-gray-50"
+                    onClick={() => setSelectedLogo(null)}
+                  >
+                    ✕
+                  </button>
+                  <motion.img
+                    key={selectedLogo}
+                    src={clientLogos[selectedLogo]}
+                    alt={`Client preview ${selectedLogo + 1}`}
+                    className="w-full h-full object-contain"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.18 }}
+                    whileHover={{ scale: 1.01 }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -60,7 +60,7 @@ const HomeServices = () => {
 
         <Swiper
           modules={[Autoplay, Pagination]}
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          autoplay={{ delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           pagination={{ clickable: true }}
           loop={true}
           spaceBetween={24}
@@ -73,20 +73,20 @@ const HomeServices = () => {
           className="pb-20"
         >
           {services.map((service, index) => (
-            <SwiperSlide key={service.id}>
+            <SwiperSlide key={service.id} style={{ overflow: 'visible' }}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.01 }}
                 viewport={{ once: true }}
-                className="bg-zinc-900 border rounded-xl p-6 h-[370px] flex flex-col justify-between group transition-all duration-350"
+                className="bg-zinc-900 border rounded-xl p-6 h-[370px] flex flex-col justify-between group transition-all duration-300 will-change-transform"
                 style={{ borderColor: '#1f2937' }}
                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#FF0000')}
                 onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#1f2937')}
               >
                 <div>
-                  <div className="relative w-14 h-14 mb-4 transition-transform duration-300 group-hover:scale-110">
-                    <div className="absolute inset-0 rounded-lg backdrop-blur-md bg-black/40 border border-white/10 shadow-inner transition-all duration-300 group-hover:bg-[#FF0000]/60 group-hover:backdrop-blur-lg" />
+                  <div className="relative w-14 h-14 mb-4 transition-all duration-300">
+                    <div className="absolute inset-0 rounded-lg backdrop-blur-md bg-black/40 border border-white/10 shadow-inner transition-all duration-300" />
                     <div className="relative z-10 flex items-center justify-center w-full h-full">
                       {service.icon &&
                         React.createElement(service.icon, {

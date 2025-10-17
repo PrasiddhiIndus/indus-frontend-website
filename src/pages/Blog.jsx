@@ -7,7 +7,7 @@ const NewVentures = lazy(() => import('./blogsection/NewVentures'));
 const HeroBlog = lazy(() => import('./blogsection/HeroBlog'));
 const RecentEventsPage = lazy(() => import('./blogsection/RecentEventsPage'));
 const BlogsSection = lazy(() => import('./blogsection/BlogsSection'));
-const GeneralInfoSection = lazy(() => import('./blogsection/GeneralInfoSection'));
+const AwardsCertificatesSection = lazy(() => import('./blogsection/AwardsCertificatesSection'));
 
 const Blog = () => {
   return (
@@ -15,6 +15,11 @@ const Blog = () => {
       <Suspense fallback={<LoadingSpinner text="Loading hero section..." size="large" />}>
         <HeroBlog />
       </Suspense>
+      <LazyLoadWrapper fallback={<LoadingSpinner text="Loading blogs..." />}>
+        <Suspense fallback={<LoadingSpinner text="Preparing blogs..." />}>
+          <BlogsSection />
+        </Suspense>
+      </LazyLoadWrapper>
       
       <LazyLoadWrapper fallback={<LoadingSpinner text="Loading ventures..." />}>
         <Suspense fallback={<LoadingSpinner text="Preparing ventures..." />}>
@@ -28,15 +33,11 @@ const Blog = () => {
         </Suspense>
       </LazyLoadWrapper>
       
-      <LazyLoadWrapper fallback={<LoadingSpinner text="Loading blogs..." />}>
-        <Suspense fallback={<LoadingSpinner text="Preparing blogs..." />}>
-          <BlogsSection />
-        </Suspense>
-      </LazyLoadWrapper>
+  
       
       <LazyLoadWrapper fallback={<LoadingSpinner text="Loading information..." />}>
         <Suspense fallback={<LoadingSpinner text="Preparing information..." />}>
-          <GeneralInfoSection />
+          <AwardsCertificatesSection />
         </Suspense>
       </LazyLoadWrapper>
     </div>
