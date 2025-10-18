@@ -13,7 +13,7 @@ const values = [
   {
     icon: Award,
     title: 'Vision',
-    description:'To be a global leader in fire safety solutions, delivering exceptional quality in manpower, vehicle manufacturing, training, and turnkey projects, while adhering to ISO certifications and aligning with NFPA standards to ensure safety, innovation, and reliability.',
+    description: 'To be a global leader in fire safety solutions, delivering exceptional quality in manpower, vehicle manufacturing, training, and turnkey projects, while adhering to ISO certifications and aligning with NFPA standards to ensure safety, innovation, and reliability.',
     image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg',
   },
   {
@@ -38,7 +38,7 @@ const AboutUs = () => {
       {/* Hero Section */}
       <section id="about-us" className="relative py-28 bg-black overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-zinc-900/90"></div>
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg')] bg-cover bg-center opacity-10 scale-110 blur-sm"></div>
+        <div className="absolute inset-0 bg-[url('http://209.182.233.237/images/indus1.jpg')] bg-cover bg-center opacity-20 scale-110"></div>        
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
