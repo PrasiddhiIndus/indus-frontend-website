@@ -158,10 +158,10 @@ const Footer = () => {
             © 2025 Indus Fire Safety Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200">
+            <a  className="text-gray-400 hover:text-white transition-colors duration-200">
               Privacy Policy
             </a>
-            <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors duration-200">
+            <a  className="text-gray-400 hover:text-white transition-colors duration-200">
               Terms of Service
             </a>
             {/* Website Credit */}
