@@ -129,7 +129,7 @@ const Contact = () => {
 
       {/* Contact Form + Map */}
       <section className="py-20 bg-neutral-950">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -216,11 +216,13 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-full h-full"
+            className="w-full h-full px-4 sm:px-0"
           >
-            <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-8 h-full max-w-full flex flex-col">
-              <h2 className="text-3xl font-bold mb-6">Find Us</h2>
-              <div className="relative w-full rounded-lg overflow-hidden flex-1">
+            <div className="bg-neutral-900 border border-neutral-700 rounded-xl p-4 sm:p-8 flex flex-col h-full w-full">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center sm:text-left">
+                Find Us
+              </h2>
+              <div className="relative w-full h-64 sm:h-96 rounded-lg overflow-hidden">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.378813585847!2d73.15458607605181!3d22.377072440106815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8b908309de5%3A0x67828595323499d3!2sIndus%20Fire%20Safety%20Pvt%20Ltd%20(Indus%20Group)!5e0!3m2!1sen!2sin!4v1752296052214!5m2!1sen!2sin"
                   title="Indus Fire Safety Location"
@@ -230,9 +232,9 @@ const Contact = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-
             </div>
           </motion.div>
+
         </div>
       </section>
     </div>
