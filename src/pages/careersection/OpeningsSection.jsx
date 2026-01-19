@@ -8,12 +8,10 @@ const ITEMS_PER_PAGE = 5;
 
 const OpeningsSection = () => {
   const [openings, setOpenings] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
     const fetchOpenings = async () => {
-      setLoading(true);
       const { data, error } = await supabase
         .from('careers')
         .select('*')
@@ -22,9 +20,8 @@ const OpeningsSection = () => {
       if (error) {
         console.error('Error fetching careers:', error.message);
       } else {
-        setOpenings(data);
+        setOpenings(data || []);
       }
-      setLoading(false);
     };
 
     fetchOpenings();
@@ -49,9 +46,7 @@ const OpeningsSection = () => {
           <p className="text-gray-400 text-lg sm:text-xl">Explore opportunities to grow your career with us</p>
         </div>
 
-        {loading ? (
-          <p className="text-gray-400 text-center py-20">Loading openings...</p>
-        ) : openings.length === 0 ? (
+        {openings.length === 0 ? (
           <p className="text-gray-400 text-center py-20 text-lg">Openings will be coming soon!</p>
         ) : (
           <>

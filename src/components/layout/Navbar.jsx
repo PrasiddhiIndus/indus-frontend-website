@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouting } from '../../contexts/RoutingContext';
 import logo from "../../assets/image/website_logo.webp"
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const location = useLocation();
+  const { currentPage, navigate } = useRouting();
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -18,9 +18,9 @@ const Navbar = () => {
   // }, []);
 
   useEffect(() => {
-  window.scrollTo(0, 0);
-  setIsOpen(false); // Close the menu when route changes
-}, [location]);
+    window.scrollTo(0, 0);
+    setIsOpen(false); // Close the menu when route changes
+  }, [currentPage]);
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -86,7 +86,7 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3">
+          <button onClick={() => navigate('/')} className="flex items-center space-x-3 cursor-pointer">
             <img
               src={logo}
               alt="Indus Fire Safety Logo"
@@ -102,7 +102,7 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
                 We fight what you fear
               </span>
             </div>
-          </Link>
+          </button>
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
@@ -122,16 +122,16 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
                     <span>{item.name}</span>
                   </a>
                 ) : (
-                  <Link
-                    to={item.path}
-                    className={`flex items-center space-x-1 transition-colors duration-200 ${location.pathname === item.path
+                  <button
+                    onClick={() => item.path && navigate(item.path)}
+                    className={`flex items-center space-x-1 transition-colors duration-200 ${currentPage === item.path
                       ? 'text-[#FF0000]'
                       : 'text-gray-300 hover:text-white'
                       }`}
                   >
                     <span>{item.name}</span>
                     {item.dropdown && <ChevronDown className="w-4 h-4" />}
-                  </Link>
+                  </button>
                 )}
 
                 {/* Dropdown Menu */}
@@ -148,15 +148,29 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
                  transition-all duration-300"
                     >
                       {item.dropdown.map((subItem) => (
-                        <Link
+                        <button
                           key={subItem.name}
-                          to={subItem.path}
-                          className={`block px-4 py-3 text-gray-300 transition-colors duration-200
+                          onClick={() => {
+                            if (subItem.path.includes('#')) {
+                              // Handle hash links (like /about#about-us)
+                              const [path, hash] = subItem.path.split('#');
+                              navigate(path);
+                              setTimeout(() => {
+                                const element = document.getElementById(hash);
+                                if (element) {
+                                  element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                              }, 100);
+                            } else {
+                              navigate(subItem.path);
+                            }
+                          }}
+                          className={`block w-full text-left px-4 py-3 text-gray-300 transition-colors duration-200
                      hover:text-white hover:bg-white/10 hover:backdrop-blur-sm 
                      first:rounded-t-xl last:rounded-b-xl`}
                         >
                           {subItem.name}
-                        </Link>
+                        </button>
                       ))}
                     </motion.div>
                   )}
@@ -200,30 +214,46 @@ className={`fixed z-50 left-1/2 transform -translate-x-1/2 transition-all durati
                         {item.name}
                       </a>
                     ) : (
-                      <Link
-                        to={item.path}
-                        className={`block px-3 py-2 rounded-md transition-all duration-200 ${location.pathname === item.path
+                      <button
+                        onClick={() => {
+                          if (item.path) navigate(item.path);
+                          setIsOpen(false);
+                        }}
+                        className={`block w-full text-left px-3 py-2 rounded-md transition-all duration-200 ${currentPage === item.path
                             ? 'text-white bg-white/10 backdrop-blur-sm'
                             : 'text-gray-300 hover:text-white hover:bg-white/10 hover:backdrop-blur-sm'
                           }`}
-                        onClick={() => setIsOpen(false)}
                       >
                         {item.name}
-                      </Link>
+                      </button>
                     )}
 
                     {/* Mobile Dropdown */}
                     {item.dropdown && (
                       <div className="ml-4 mt-2 space-y-1">
                         {item.dropdown.map((subItem) => (
-                          <Link
+                          <button
                             key={subItem.name}
-                            to={subItem.path}
-                            className="block px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-md transition-all duration-200"
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => {
+                              if (subItem.path.includes('#')) {
+                                // Handle hash links (like /about#about-us)
+                                const [path, hash] = subItem.path.split('#');
+                                navigate(path);
+                                setTimeout(() => {
+                                  const element = document.getElementById(hash);
+                                  if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth' });
+                                  }
+                                }, 100);
+                              } else {
+                                navigate(subItem.path);
+                              }
+                              setIsOpen(false);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-md transition-all duration-200"
                           >
                             {subItem.name}
-                          </Link>
+                          </button>
                         ))}
                       </div>
                     )}

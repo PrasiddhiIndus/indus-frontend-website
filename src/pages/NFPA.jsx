@@ -1,26 +1,46 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
+import { preloadImages } from '../utils/imagePreloader';
 import NFPAHero from './nfpasection/NFPAHero';
 import NFPACourses from './nfpasection/NFPACourses';
 import NFPABatches from './nfpasection/NFPABatches';
 import NFPANews from './nfpasection/NFPANews';
 import NFPACTA from './nfpasection/NFPACTA';
-import LoadingSpinner from '../components/LoadingSpinner';
-import LazyLoadWrapper from '../components/LazyLoadWrapper';
+import NFPAGallery from './nfpasection/NFPAGallery';
 
-// Lazy load the gallery component
-const NFPAGallery = lazy(() => import('./nfpasection/NFPAGallery'));
+// All NFPA page images - preload these immediately
+const NFPA_IMAGES = [
+  // Gallery images
+  'http://209.182.233.237/images/NFPAGAL1.jpg',
+  'http://209.182.233.237/images/NFPAGAL2.jpg',
+  'http://209.182.233.237/images/NFPAGAL3.jpg',
+  'http://209.182.233.237/images/NFPAGAL4.jpg',
+  'http://209.182.233.237/images/NFPAGAL5.jpg',
+  'http://209.182.233.237/images/NFPAGAL6.jpg',
+  'http://209.182.233.237/images/NFPAGAL7.jpg',
+  'http://209.182.233.237/images/NFPAGAL8.jpg',
+  'http://209.182.233.237/images/NFPAGAL9.jpg',
+  // Hero images
+  'http://209.182.233.237/images/NFPAGAL8.jpg',
+  'http://209.182.233.237/images/training6.jpg',
+];
 
 const NFPA = () => {
   const [courses, setCourses] = useState([]);
   const [batches, setBatches] = useState([]);
   const [latestNews, setLatestNews] = useState([]);
-  const [loadingCourses, setLoadingCourses] = useState(true);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
+
+  // Preload all images immediately when component mounts
+  useEffect(() => {
+    // Start preloading images immediately
+    preloadImages(NFPA_IMAGES).then(() => {
+      setImagesPreloaded(true);
+    });
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoadingCourses(true);
-
       // Fetch Courses
       const { data: courseData, error: courseError } = await supabase
         .from('nfpa_courses')
@@ -54,7 +74,7 @@ const NFPA = () => {
         course: batch.nfpa_courses?.title || 'Unknown',
         startDate: batch.start_date,
         endDate: batch.end_date,
-        status: batch.status || 'open', // Ensure status field is included
+        status: batch.status || 'open',
       }));
 
       setBatches(mappedBatches);
@@ -69,7 +89,21 @@ const NFPA = () => {
 
       setLatestNews(newsData || []);
 
-      setLoadingCourses(false);
+      // Preload any images from database (if they exist in news or courses)
+      const dbImages = [];
+      if (newsData) {
+        newsData.forEach(item => {
+          if (item.image_url) dbImages.push(item.image_url);
+        });
+      }
+      if (courseData) {
+        courseData.forEach(item => {
+          if (item.image_url) dbImages.push(item.image_url);
+        });
+      }
+      if (dbImages.length > 0) {
+        preloadImages(dbImages);
+      }
     };
 
     fetchData();
@@ -78,20 +112,9 @@ const NFPA = () => {
   return (
     <div className="min-h-screen">
       <NFPAHero />
-      {!loadingCourses && <NFPACourses courses={courses} />}
+      <NFPACourses courses={courses} />
       <NFPABatches batches={batches} />
-      
-      {/* Lazy loaded gallery section */}
-      <LazyLoadWrapper 
-        fallback={<LoadingSpinner text="Loading gallery..." size="large" />}
-        threshold={0.2}
-        rootMargin="100px"
-      >
-        <Suspense fallback={<LoadingSpinner text="Preparing gallery..." size="large" />}>
-          <NFPAGallery />
-        </Suspense>
-      </LazyLoadWrapper>
-      
+      <NFPAGallery />
       <NFPANews news={latestNews} />
       <NFPACTA />
     </div>

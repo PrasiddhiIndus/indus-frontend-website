@@ -34,6 +34,8 @@ const GallerySection = () => (
               src={image}
               alt={`Team moment ${index + 1}`}
               className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+              loading="eager"
+              fetchPriority={index < 3 ? "high" : "auto"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center">
               <Camera className="w-8 h-8 text-white mb-4" />

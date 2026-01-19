@@ -1,10 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const HeroSection = () => (
-  <section className="relative py-20 overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-br from-primary-900/20 to-dark-900/40"></div>
-    <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg')] bg-cover bg-center bg-no-repeat opacity-20"></div>
+const HeroSection = () => {
+  // Preload the hero background image
+  React.useEffect(() => {
+    const heroImg = new Image();
+    heroImg.src = 'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg';
+  }, []);
+
+  return (
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-900/20 to-dark-900/40"></div>
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg')] bg-cover bg-center bg-no-repeat opacity-20"></div>
 
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -22,6 +29,7 @@ const HeroSection = () => (
       </motion.div>
     </div>
   </section>
-);
+  );
+};
 
 export default HeroSection;

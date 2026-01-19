@@ -75,7 +75,8 @@ const ServicesMarkets = ({ title, description, images }) => {
                       src={img}
                       alt={`Slide ${idx + 1}`}
                       className="w-full h-[320px] object-cover"
-                      loading="lazy"
+                      loading="eager"
+                      fetchPriority={idx < 2 ? "high" : "auto"}
                     />
                   </motion.div>
                 </div>

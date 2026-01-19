@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const NFPAGallery = () => {
-  const [loadedImages, setLoadedImages] = useState(new Set());
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Gallery images from external URLs - 8 images total
+  // Gallery images from external URLs - 9 images total
   const galleryImages = [
     'http://209.182.233.237/images/NFPAGAL1.jpg',
     'http://209.182.233.237/images/NFPAGAL2.jpg',
@@ -18,48 +16,6 @@ const NFPAGallery = () => {
     'http://209.182.233.237/images/NFPAGAL8.jpg',
     'http://209.182.233.237/images/NFPAGAL9.jpg'
   ];
-
-  // Image preloading
-  useEffect(() => {
-    const preloadImages = async () => {
-      setIsLoading(true);
-      const loadPromises = galleryImages.map((image, index) => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => {
-            setLoadedImages(prev => new Set([...prev, index]));
-            resolve();
-          };
-          img.onerror = () => {
-            console.warn(`Failed to load image: ${image}`);
-            resolve(); // Continue even if image fails
-          };
-          img.src = image;
-        });
-      });
-
-      await Promise.all(loadPromises);
-      setIsLoading(false);
-    };
-
-    preloadImages();
-  }, []);
-
-  // Show loading state while images are loading
-  if (isLoading) {
-    return (
-      <section className="py-20 bg-black text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center items-center py-16">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
-              <p className="text-gray-400">Loading gallery images...</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="py-20 bg-black text-white">
@@ -86,6 +42,8 @@ const NFPAGallery = () => {
                 src={image}
                 alt={`NFPA Training Session ${index + 1}`}
                 className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="eager"
+                fetchPriority={index < 6 ? "high" : "auto"}
                 style={{
                   imageRendering: 'high-quality',
                   WebkitBackfaceVisibility: 'hidden',

@@ -8,7 +8,6 @@ import { supabase } from '../../utils/supabaseClient';
 const HeroBlogSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [blogSliderData, setBlogSliderData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,8 +22,6 @@ const HeroBlogSlider = () => {
         const uniqueData = Array.from(new Map(data.map(item => [item.id, item])).values());
         setBlogSliderData(uniqueData);
       }
-
-      setLoading(false);
     };
     fetchData();
   }, []);
@@ -57,30 +54,29 @@ const HeroBlogSlider = () => {
     ],
   };
 
-
-
-  if (loading || blogSliderData.length === 0) {
-    return <div className="text-center text-white p-8">Loading blogs...</div>;
-  }
-
-  const currentBg = blogSliderData[currentSlide]?.image_url;
+  const currentBg = blogSliderData.length > 0 ? blogSliderData[currentSlide]?.image_url : null;
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentBg}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, scale: 1.05 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${currentBg})` }}
-        >
-          <div className="absolute inset-0 bg-black/70" />
-        </motion.div>
-      </AnimatePresence>
+      {currentBg && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentBg}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, scale: 1.05 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${currentBg})` }}
+          >
+            <div className="absolute inset-0 bg-black/70" />
+          </motion.div>
+        </AnimatePresence>
+      )}
+      {!currentBg && (
+        <div className="absolute inset-0 bg-black" />
+      )}
 
       {/* Title and Description */}
       <div className="absolute top-1/2 left-1/2 z-10 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4">

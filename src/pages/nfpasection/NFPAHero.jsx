@@ -66,6 +66,8 @@ const NFPAHero = () => (
                 src="http://209.182.233.237/images/training6.jpg"
                 alt="NFPA Training"
                 className="w-full h-full object-cover aspect-[4/3] max-w-full"
+                loading="eager"
+                fetchPriority="high"
               />
             </div>
           </motion.div>

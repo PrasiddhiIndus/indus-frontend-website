@@ -71,6 +71,8 @@ const WhyUsSection = () => {
                   src={benefit.image}
                   alt={benefit.title}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  loading="eager"
+                  fetchPriority={index < 3 ? "high" : "auto"}
                 />
                 <div className="absolute top-4 right-4 bg-white group-hover:bg-[#ff0000] transition-colors duration-300 p-2">
                   <benefit.icon className="w-6 h-6 text-black group-hover:text-white" />

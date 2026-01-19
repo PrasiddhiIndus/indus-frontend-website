@@ -37,6 +37,8 @@ const EventsSection = () => (
               src={image}
               alt={`Team moment ${index + 1}`}
               className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="eager"
+              fetchPriority={index < 3 ? "high" : "auto"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center">
             </div>

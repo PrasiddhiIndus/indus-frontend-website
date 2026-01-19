@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useRouting } from '../../contexts/RoutingContext';
 import { motion } from 'framer-motion';
 
 
 const HomeAbout = () => {
+    const { navigate } = useRouting();
     return (
         <section className="bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
@@ -25,12 +26,12 @@ const HomeAbout = () => {
                         With a strong legacy and future-focused approach, Indus Fire Safety remains committed to safeguarding lives,
                         assets, and industry operations across India’s most demanding sectors.
                     </p>
-                    <Link
-                        to="/about"
+                    <button
+                        onClick={() => navigate('/about')}
                         className="inline-block mt-4 px-6 py-3 bg-[#950101] hover:bg-[#FF0000] active:bg-[#FF0000] text-white rounded-lg font-semibold transition duration-300 shadow-md hover:shadow-lg"
                     >
                         Learn More About Us
-                    </Link>
+                    </button>
 
                 </motion.div>
 

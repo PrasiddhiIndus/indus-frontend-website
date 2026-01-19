@@ -14,7 +14,6 @@ import { supabase } from '../utils/supabaseClient';
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [videoErrors, setVideoErrors] = useState(new Set());
 
   // Function to handle video errors silently
@@ -24,8 +23,6 @@ const Home = () => {
 
   useEffect(() => {
     const fetchSliderData = async () => {
-      setLoading(true);
-      
       const { data, error } = await supabase
         .from('slider_section')
         .select('*')
@@ -36,22 +33,10 @@ const Home = () => {
       } else {
         setSlides(data || []);
       }
-      setLoading(false);
     };
 
     fetchSliderData();
   }, []);
-  // Show loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
-          <p className="text-gray-400">Loading slider content...</p>
-        </div>
-      </div>
-    );
-  }
 
   // Show empty state if no slides
   if (!slides || slides.length === 0) {

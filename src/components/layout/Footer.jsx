@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useRouting } from '../../contexts/RoutingContext';
 import {
   Facebook,
   Twitter,
@@ -13,13 +13,14 @@ import {
 import logo from '../../assets/image/website_logo.webp';
 
 const Footer = () => {
+  const { navigate } = useRouting();
   return (
     <footer className="bg-black/40 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-3">
+            <button onClick={() => navigate('/')} className="flex items-center space-x-3 cursor-pointer">
               <img
                 src={logo}
                 alt="Indus Fire Safety Logo"
@@ -35,7 +36,7 @@ const Footer = () => {
                   We fight what you fear
                 </span>
               </div>
-            </Link>
+            </button>
             <p className="text-gray-400 text-sm">
               Providing fire safety, manpower, training, and emergency response solutions across India with commitment and compliance.
             </p>
@@ -60,34 +61,34 @@ const Footer = () => {
             <h3 className="text-white font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Home
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/about')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   About
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/nfpa" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/nfpa')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   NFPA Training
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/products" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/products')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Products
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/careers" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/careers')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Careers
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/contact')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Contact
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -97,34 +98,34 @@ const Footer = () => {
             <h3 className="text-white font-semibold text-lg mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/manpower" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/manpower')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Manpower Solutions
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/products" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/products')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Equipment Rental
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/projects" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/projects')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Project Management
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/nfpa" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/nfpa')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   NFPA Certified Training
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/repair-maintenance" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/repair-maintenance')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Repair & Maintenance
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/trucks" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <button onClick={() => navigate('/trucks')} className="text-gray-400 hover:text-white transition-colors duration-200">
                   Truck Manufacturing
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

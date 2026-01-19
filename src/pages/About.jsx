@@ -1,21 +1,18 @@
-import React, { useEffect, lazy, Suspense } from 'react';
-import { useLocation } from 'react-router-dom';
-import LoadingSpinner from '../components/LoadingSpinner';
-import LazyLoadWrapper from '../components/LazyLoadWrapper';
-
-// Lazy load about sections
-const AboutUs = lazy(() => import('./AboutUs'));
-const AboutTeam = lazy(() => import('./AboutTeam'));
-const AboutTestimonials = lazy(() => import('./AboutTestimonial'));
-const AboutClients = lazy(() => import('./AboutClient'));
+import React, { useEffect } from 'react';
+import { useRouting } from '../contexts/RoutingContext';
+import AboutUs from './AboutUs';
+import AboutTeam from './AboutTeam';
+import AboutTestimonials from './AboutTestimonial';
+import AboutClients from './AboutClient';
 
 const About = () => {
-  const location = useLocation();
+  const { currentPage } = useRouting();
 
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const section = document.getElementById(id);
+    // Check if there's a hash in the URL
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const section = document.getElementById(hash);
       if (section) {
         setTimeout(() => {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -24,31 +21,14 @@ const About = () => {
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [location]);
+  }, [currentPage]);
 
   return (
     <div className="min-h-screen">
-      <Suspense fallback={<LoadingSpinner text="Loading about section..." size="large" />}>
-        <AboutUs />
-      </Suspense>
-      
-      <LazyLoadWrapper fallback={<LoadingSpinner text="Loading team..." />}>
-        <Suspense fallback={<LoadingSpinner text="Preparing team..." />}>
-          <AboutTeam />
-        </Suspense>
-      </LazyLoadWrapper>
-      
-      <LazyLoadWrapper fallback={<LoadingSpinner text="Loading testimonials..." />}>
-        <Suspense fallback={<LoadingSpinner text="Preparing testimonials..." />}>
-          <AboutTestimonials />
-        </Suspense>
-      </LazyLoadWrapper>
-      
-      <LazyLoadWrapper fallback={<LoadingSpinner text="Loading clients..." />}>
-        <Suspense fallback={<LoadingSpinner text="Preparing clients..." />}>
-          <AboutClients />
-        </Suspense>
-      </LazyLoadWrapper>
+      <AboutUs />
+      <AboutTeam />
+      <AboutTestimonials />
+      <AboutClients />
     </div>
   );
 };
