@@ -9,12 +9,14 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    strictPort: false, // Allow fallback to next available port if 3000 is taken
     host: true,
     // Enable SPA routing for development
     historyApiFallback: true,
   },
   preview: {
     port: 3000,
+    strictPort: false, // Allow fallback to next available port if 3000 is taken
     host: true,
     // Enable SPA routing for preview
     historyApiFallback: true,

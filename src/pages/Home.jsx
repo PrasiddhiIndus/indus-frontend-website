@@ -10,6 +10,12 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { supabase } from '../utils/supabaseClient';
+import { validateImageUrl, getPlaceholderImage } from '../utils/apiHelpers';
+
+// Get Supabase URL for storage path conversion
+const getSupabaseUrl = () => {
+  return import.meta.env.VITE_SUPABASE_URL || '';
+};
 
 
 const Home = () => {
@@ -31,7 +37,37 @@ const Home = () => {
       if (error) {
         console.error("Error fetching slides:", error);
       } else {
-        setSlides(data || []);
+        // Log the data to help debug
+        console.log("Fetched slides data:", data);
+        
+        // Process and validate image URLs
+        const supabaseUrl = getSupabaseUrl();
+        const processedSlides = (data || []).map((slide) => {
+          const processed = { ...slide };
+          
+          // Validate and process image URLs with Supabase URL for storage paths
+          if (slide.image_url) {
+            processed.image_url = validateImageUrl(slide.image_url, supabaseUrl);
+            if (!processed.image_url) {
+              console.warn(`Invalid image_url for slide ${slide.id}:`, slide.image_url);
+            } else {
+              console.log(`Validated image_url for slide ${slide.id}:`, processed.image_url);
+            }
+          }
+          if (slide.image) {
+            processed.image = validateImageUrl(slide.image, supabaseUrl);
+            if (!processed.image) {
+              console.warn(`Invalid image for slide ${slide.id}:`, slide.image);
+            }
+          }
+          if (slide.video_url) {
+            processed.video_url = validateImageUrl(slide.video_url, supabaseUrl);
+          }
+          
+          return processed;
+        });
+        
+        setSlides(processedSlides);
       }
     };
 
@@ -78,22 +114,22 @@ const Home = () => {
               return imageExtensions.some(ext => url.toLowerCase().includes(ext));
             };
             
-            // Smart media detection
+            // Smart media detection with URL validation
             let finalVideoUrl = null;
             let finalImageUrl = null;
             
             if (videoUrl && isVideoFile(videoUrl)) {
-              finalVideoUrl = videoUrl;
+              finalVideoUrl = validateImageUrl(videoUrl) || videoUrl;
             } else if (videoUrl && isImageFile(videoUrl)) {
               // If video_url contains an image, treat it as image
-              finalImageUrl = videoUrl;
+              finalImageUrl = validateImageUrl(videoUrl);
             }
             
             if (imageUrl && isImageFile(imageUrl)) {
-              finalImageUrl = imageUrl;
+              finalImageUrl = validateImageUrl(imageUrl);
             } else if (imageUrl && isVideoFile(imageUrl)) {
               // If image_url contains a video, treat it as video
-              finalVideoUrl = imageUrl;
+              finalVideoUrl = validateImageUrl(imageUrl) || imageUrl;
             }
             
             return (
@@ -118,9 +154,22 @@ const Home = () => {
                       className="absolute inset-0 w-full h-full object-cover"
                       src={finalImageUrl}
                       alt={slide.title || `Slide ${index + 1}`}
-                      loading="lazy"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "auto"}
                       onError={(e) => {
-                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMzMzMzMzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JbWFnZSBGYWlsZWQgdG8gTG9hZDwvdGV4dD4KPC9zdmc+';
+                        console.error(`Failed to load image for slide ${index + 1}:`, {
+                          originalUrl: imageUrl,
+                          validatedUrl: finalImageUrl,
+                          slideData: slide
+                        });
+                        e.target.src = getPlaceholderImage();
+                        e.target.onerror = null; // Prevent infinite loop
+                      }}
+                      onLoad={() => {
+                        // Image loaded successfully - only log in development
+                        if (import.meta.env.DEV) {
+                          console.log(`Image loaded successfully for slide ${index + 1}:`, finalImageUrl);
+                        }
                       }}
                       style={{
                         imageRendering: 'high-quality',

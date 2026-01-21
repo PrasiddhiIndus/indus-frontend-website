@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Briefcase } from 'lucide-react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { validateImageUrl, getPlaceholderImage } from '../../utils/apiHelpers';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
@@ -17,6 +18,7 @@ const fadeInUp = {
 const ServicesMarkets = ({ title, description, images }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const [imageErrors, setImageErrors] = useState(new Set());
 
   const sliderSettings = {
     autoplay: true,
@@ -64,23 +66,43 @@ const ServicesMarkets = ({ title, description, images }) => {
             variants={fadeInUp}
           >
             <Slider {...sliderSettings}>
-              {images.map((img, idx) => (
-                <div key={idx} className="px-2">
-                  <motion.div
-                    className="overflow-hidden border border-gray-700 shadow-lg"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                  >
-                    <img
-                      src={img}
-                      alt={`Slide ${idx + 1}`}
-                      className="w-full h-[320px] object-cover"
-                      loading="eager"
-                      fetchPriority={idx < 2 ? "high" : "auto"}
-                    />
-                  </motion.div>
+              {images && images.length > 0 ? images.map((img, idx) => {
+                const validatedUrl = validateImageUrl(img);
+                return (
+                  <div key={idx} className="px-2">
+                    <motion.div
+                      className="overflow-hidden border border-gray-700 shadow-lg"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    >
+                      <img
+                        src={validatedUrl || getPlaceholderImage()}
+                        alt={`Slide ${idx + 1}`}
+                        className="w-full h-[320px] object-cover"
+                        loading={idx < 2 ? "eager" : "lazy"}
+                        fetchPriority={idx < 2 ? "high" : "auto"}
+                        onError={(e) => {
+                          if (!imageErrors.has(idx)) {
+                            console.error(`Failed to load image ${idx + 1}:`, img);
+                            setImageErrors(prev => new Set([...prev, idx]));
+                          }
+                          e.target.src = getPlaceholderImage();
+                          e.target.onerror = null; // Prevent infinite loop
+                        }}
+                        onLoad={() => {
+                          console.log(`Image ${idx + 1} loaded successfully`);
+                        }}
+                      />
+                    </motion.div>
+                  </div>
+                );
+              }) : (
+                <div className="px-2">
+                  <div className="w-full h-[320px] bg-gray-800 flex items-center justify-center">
+                    <p className="text-gray-400">No images available</p>
+                  </div>
                 </div>
-              ))}
+              )}
             </Slider>
           </motion.div>
         </div>
