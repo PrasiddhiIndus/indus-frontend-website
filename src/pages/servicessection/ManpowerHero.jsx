@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useViewportScroll, useTransform, animate } from 'framer-motion';
-import bgVideo from '../../assets/image/manpower.mp4';
-import logo from '../../assets/image/website_logo.webp';
 
 const ManpowerHero = () => {
   const { scrollY } = useViewportScroll();
@@ -48,9 +46,10 @@ const ManpowerHero = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0 scale-150"
+        style={{ transformOrigin: 'center center' }}
       >
-        <source src={bgVideo} type="video/mp4" />
+        <source src="/assets/videos/servicemanpower.mp4" type="video/mp4" />
       </video>
 
       <div
@@ -92,7 +91,7 @@ const ManpowerHero = () => {
           <div className="w-full max-w-5xl flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6 flex-wrap">
               <img
-                src={logo}
+                src="/assets/website_logo.webp"
                 alt="Logo"
                 className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
                 loading="lazy"

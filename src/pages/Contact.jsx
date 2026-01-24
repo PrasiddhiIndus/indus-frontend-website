@@ -54,22 +54,35 @@ const Contact = () => {
         'Indus House, Block No 501/1',
         'Opp. GSFC Main Gate, Dashrath',
         'Vadodara - 391740, Gujarat, India'
-      ]
+      ],
+      type: 'location',
+      link: 'https://www.google.com/maps/search/?api=1&query=Indus+House,+Block+No+501/1,+Opposite+GSFC+Main+Gate,+Dashrath,+Vadodara+-+391740,+Gujarat,+India'
     },
     {
       icon: Phone,
       title: 'Phone Numbers',
-      details: ['+91-8128660114', '7016255476']
+      details: [
+        { text: '+91-8128660114', link: 'tel:+918128660114' },
+        { text: '+91-7016255476', link: 'tel:+917016255476' }
+      ],
+      type: 'phone'
     },
     {
       icon: Mail,
       title: 'Email Addresses',
-      details: ['info@indusfiresafety.com']
+      details: [
+        { 
+          text: 'info@indusfiresafety.com', 
+          link: 'mailto:info@indusfiresafety.com?subject=Inquiry%20from%20Website&body=Hello,%0D%0A%0D%0AI%20would%20like%20to%20inquire%20about%20your%20services.' 
+        }
+      ],
+      type: 'email'
     },
     {
       icon: Clock,
       title: 'Business Hours',
-      details: ['Mon - Sat: 8:30 AM - 5 PM', 'Sunday: Emergency Only']
+      details: ['Mon - Sat: 8:30 AM - 5 PM', 'Sunday: Emergency Only'],
+      type: 'hours'
     }
   ];
 
@@ -108,18 +121,44 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-neutral-900 border border-neutral-700 rounded-xl p-6 text-center hover:border-[#ff0000] transition-all duration-300"
+                className={`bg-neutral-900 border border-neutral-700 rounded-xl p-6 text-center hover:border-[#ff0000] transition-all duration-300 ${info.type === 'location' && info.link ? 'cursor-pointer' : ''}`}
+                onClick={info.type === 'location' && info.link ? () => window.open(info.link, '_blank', 'noopener,noreferrer') : undefined}
               >
                 <div className="bg-[#ff0000] w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-6">
                   <info.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">{info.title}</h3>
                 <div className="space-y-2">
-                  {info.details.map((detail, idx) => (
-                    <p key={idx} className="text-gray-400 break-words">
-                      {detail}
-                    </p>
-                  ))}
+                  {info.details.map((detail, idx) => {
+                    const detailText = typeof detail === 'string' ? detail : detail.text;
+                    const detailLink = typeof detail === 'string' ? null : detail.link;
+                    
+                    if (info.type === 'location' && info.link) {
+                      // For location, all details are clickable via card click
+                      return (
+                        <p key={idx} className="text-gray-400 break-words">
+                          {detailText}
+                        </p>
+                      );
+                    } else if (detailLink) {
+                      return (
+                        <a
+                          key={idx}
+                          href={detailLink}
+                          className="text-gray-400 hover:text-white transition-colors duration-200 break-words block cursor-pointer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {detailText}
+                        </a>
+                      );
+                    } else {
+                      return (
+                        <p key={idx} className="text-gray-400 break-words">
+                          {detailText}
+                        </p>
+                      );
+                    }
+                  })}
                 </div>
               </motion.div>
             ))}

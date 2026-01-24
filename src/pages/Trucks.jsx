@@ -7,9 +7,9 @@ import peopleImg from '../assets/image/IndusHighres_0046.jpg';
 import ServicesMarkets from "./servicessection/ServicesMarkets";
 import ServicesContact from './servicessection/ServicesContact';
 
-const img1 = 'http://209.182.233.237/images/trucks11.png';
-const img2 = 'http://209.182.233.237/images/trucks12.png';
-const img3 = 'http://209.182.233.237/images/trucks13.png';
+const img1 = '/assets/image/trucks11.png';
+const img2 = '/assets/image/trucks12.png';
+const img3 = '/assets/image/trucks13.png';
 
 const trucksImagesMarkets = [img1, img2, img3];
 const TrucksDescriptionMarkets =
@@ -18,44 +18,6 @@ const TrucksDescriptionMarkets =
 
 const Trucks = () => {
 
-  // const trucksServices = [
-  //   {
-  //     title: 'Skilled Technicians',
-  //     description: 'Certified professionals with extensive industry experience',
-  //     image: peopleImg,
-  //     size: 'h-[500px]',
-  //   },
-  //   {
-  //     title: 'Project Teams',
-  //     description: 'Complete teams for large-scale project execution',
-  //     image: peopleImg,
-  //     size: 'h-[600px]',
-  //   },
-  //   {
-  //     title: '24/7 Support',
-  //     description: 'Round-the-clock availability for critical operations',
-  //     image: peopleImg,
-  //     size: 'h-[300px]',
-  //   },
-  //   {
-  //     title: 'Safety Compliance',
-  //     description: 'Fully compliant with industry safety standards',
-  //     image: peopleImg,
-  //     size: 'h-[420px]',
-  //   },
-  //   {
-  //     title: 'Emergency Response',
-  //     description: 'Trained teams for immediate disaster and fire handling',
-  //     image: peopleImg,
-  //     size: 'h-[300px]',
-  //   },
-  //   {
-  //     title: 'Compliance Audit',
-  //     description: 'Full safety compliance auditing and certification',
-  //     image: peopleImg,
-  //     size: 'h-[650px]',
-  //   }
-  // ];
 
   const [services, setServices] = useState([]);
 

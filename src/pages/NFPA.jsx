@@ -11,18 +11,18 @@ import NFPAGallery from './nfpasection/NFPAGallery';
 // All NFPA page images - preload these immediately
 const NFPA_IMAGES = [
   // Gallery images
-  'http://209.182.233.237/images/NFPAGAL1.jpg',
-  'http://209.182.233.237/images/NFPAGAL2.jpg',
-  'http://209.182.233.237/images/NFPAGAL3.jpg',
-  'http://209.182.233.237/images/NFPAGAL4.jpg',
-  'http://209.182.233.237/images/NFPAGAL5.jpg',
-  'http://209.182.233.237/images/NFPAGAL6.jpg',
-  'http://209.182.233.237/images/NFPAGAL7.jpg',
-  'http://209.182.233.237/images/NFPAGAL8.jpg',
-  'http://209.182.233.237/images/NFPAGAL9.jpg',
+  '/assets/NFPAGAL1.jpg',
+  '/assets/NFPAGAL2.JPG',
+  '/assets/NFPAGAL3.jpg',
+  '/assets/NFPAGAL4.JPG',
+  '/assets/NFPAGAL5.JPG',
+  '/assets/NFPAGAL6.JPG',
+  '/assets/NFPAGAL7.JPG',
+  '/assets/NFPAGAL8.jpg',
+  '/assets/NFPAGAL9.JPG',
   // Hero images
-  'http://209.182.233.237/images/NFPAGAL8.jpg',
-  'http://209.182.233.237/images/training6.jpg',
+  '/assets/NFPAGAL8.jpg',
+  '/assets/image/training1.jpg', // training6.jpg doesn't exist, using training1.jpg
 ];
 
 const NFPA = () => {

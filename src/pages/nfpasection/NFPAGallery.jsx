@@ -4,17 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 const NFPAGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Gallery images from external URLs - 9 images total
+  // Gallery images from public folder - 9 images total
   const galleryImages = [
-    'http://209.182.233.237/images/NFPAGAL1.jpg',
-    'http://209.182.233.237/images/NFPAGAL2.jpg',
-    'http://209.182.233.237/images/NFPAGAL3.jpg',
-    'http://209.182.233.237/images/NFPAGAL4.jpg',
-    'http://209.182.233.237/images/NFPAGAL5.jpg',
-    'http://209.182.233.237/images/NFPAGAL6.jpg',
-    'http://209.182.233.237/images/NFPAGAL7.jpg',
-    'http://209.182.233.237/images/NFPAGAL8.jpg',
-    'http://209.182.233.237/images/NFPAGAL9.jpg'
+    '/assets/NFPAGAL1.jpg',
+    '/assets/NFPAGAL2.JPG',
+    '/assets/NFPAGAL3.jpg',
+    '/assets/NFPAGAL4.JPG',
+    '/assets/NFPAGAL5.JPG',
+    '/assets/NFPAGAL6.JPG',
+    '/assets/NFPAGAL7.JPG',
+    '/assets/NFPAGAL8.jpg',
+    '/assets/NFPAGAL9.JPG'
   ];
 
   return (
@@ -44,6 +44,10 @@ const NFPAGallery = () => {
                 className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="eager"
                 fetchPriority={index < 6 ? "high" : "auto"}
+                onError={(e) => {
+                  console.error(`Failed to load NFPA gallery image ${index + 1}:`, image);
+                  e.target.onerror = null;
+                }}
                 style={{
                   imageRendering: 'high-quality',
                   WebkitBackfaceVisibility: 'hidden',

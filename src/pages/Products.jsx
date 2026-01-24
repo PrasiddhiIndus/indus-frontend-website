@@ -7,9 +7,9 @@ import ServicesMarkets from './servicessection/ServicesMarkets';
 import ServicesContact from './servicessection/ServicesContact';
 
 // Products market images
-const img1 = 'http://209.182.233.237/images/products10.png';
-const img2 = 'http://209.182.233.237/images/products11.png';
-const img3 = 'http://209.182.233.237/images/products12.png';
+const img1 = '';
+const img2 = '';
+const img3 = '';
 
 const productsImagesMarkets = [img1, img2, img3];
 const productsDescriptionMarkets =
@@ -55,7 +55,7 @@ const Products = () => {
     <div className="min-h-screen">
       <ProductsHero />
       <ProductsServices />
-      <ServicesProvider title="Products Services Provider" services={services} />
+      {/* <ServicesProvider title="Products Services Provider" services={services} /> */}
       {/* <ServicesMarkets 
         title="Products Markets"
         description={productsDescriptionMarkets}

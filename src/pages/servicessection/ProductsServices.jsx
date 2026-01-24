@@ -1,8 +1,6 @@
  
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import logo from '../../assets/image/website_logo.webp';
-import peopleImg from '../../assets/image/file_2025-05-21_11.02.15.png';
 
 const aboutData = {
  sectionTitle: "Products & Services",
@@ -76,7 +74,7 @@ const ProductsServices = () => {
 
             <div className="row-span-2 overflow-hidden">
               <img
-                src={peopleImg}
+                src="/assets/indusdrone.jpg"
                 alt="Team"
                 className="w-full h-full object-cover shadow-md"
                 loading="lazy"
@@ -85,7 +83,7 @@ const ProductsServices = () => {
 
             <div className="bg-[#950101] flex items-center justify-center p-4">
               <img
-                src={logo}
+                src="/assets/website_logo.webp"
                 alt="Logo"
                 className="h-12 sm:h-16"
                 loading="lazy"

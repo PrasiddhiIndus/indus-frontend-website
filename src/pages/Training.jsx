@@ -7,9 +7,9 @@ import TrainingHero from './servicessection/TrainingHero';
 import TrainingServices from './servicessection/TrainingServices';
 import ServicesContact from './servicessection/ServicesContact';
 
-const img1 = 'http://209.182.233.237/images/training9.jpg';
-const img2 = 'http://209.182.233.237/images/training10.jpg';
-const img3 = 'http://209.182.233.237/images/training11.jpg';
+const img1 = '/assets/image/training9.jpg';
+const img2 = '/assets/image/training10.jpg';
+const img3 = '/assets/image/training11.jpg';
 const manpowerImages = [img1, img2, img3];
 const manpowerDescription =
 "Training Markets We Serve — delivering specialized fire and safety training across industries. From industrial operations and emergency response teams to construction and infrastructure projects, our programs equip personnel with practical skills, NFPA-compliant knowledge, and hands-on expertise to ensure workplace safety, operational efficiency, and regulatory compliance.";

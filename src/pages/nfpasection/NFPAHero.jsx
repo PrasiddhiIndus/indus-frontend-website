@@ -10,7 +10,7 @@ const NFPAHero = () => (
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-900/20 to-black/40 z-0"></div>
       {/* Background Image */}
-      <div className="absolute inset-0 bg-[url('http://209.182.233.237/images/NFPAGAL8.jpg')] bg-cover bg-center bg-no-repeat opacity-20 z-0"></div>
+      <div className="absolute inset-0 bg-[url('/assets/NFPAGAL8.jpg')] bg-cover bg-center bg-no-repeat opacity-20 z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -63,11 +63,15 @@ const NFPAHero = () => (
           >
             <div className="rounded-xl overflow-hidden border border-gray-800 bg-gray-900/30 backdrop-blur-sm shadow-lg">
               <img
-                src="http://209.182.233.237/images/training6.jpg"
+                src="/assets/image/training1.jpg"
                 alt="NFPA Training"
                 className="w-full h-full object-cover aspect-[4/3] max-w-full"
                 loading="eager"
                 fetchPriority="high"
+                onError={(e) => {
+                  console.error('Failed to load training image:', '/assets/image/training1.jpg');
+                  e.target.onerror = null;
+                }}
               />
             </div>
           </motion.div>

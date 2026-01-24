@@ -73,7 +73,7 @@ const RepairMaintenanceService = () => {
 
             <div className="row-span-2 overflow-hidden">
               <img
-                src="http://209.182.233.237/images/randm5.jpg"
+                src="/assets/image/randm5.jpg"
                 alt="Team"
                 className="w-full h-full object-cover shadow-md"
                 loading="lazy"

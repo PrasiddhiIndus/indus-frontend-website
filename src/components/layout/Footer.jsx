@@ -136,19 +136,40 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-[#FF0000] mt-0.5 flex-shrink-0" />
-                <p className="text-gray-400">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Indus+House,+Block+No+501/1,+Opposite+GSFC+Main+Gate,+Dashrath,+Vadodara+-+391740,+Gujarat,+India"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+                >
                   Head Office / Manufacturing Unit: Indus House, Block No 501/1, Opposite GSFC Main Gate, Dashrath, Vadodara - 391740, Gujarat, India
-                </p>
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-[#FF0000] flex-shrink-0" />
-                <p className="text-gray-400">+91-8128660114/7016255476</p>
-
-
+                <div className="flex flex-col space-y-1">
+                  <a
+                    href="tel:+918128660114"
+                    className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    +91-8128660114
+                  </a>
+                  <a
+                    href="tel:+917016255476"
+                    className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    +91-7016255476
+                  </a>
+                </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#FF0000] flex-shrink-0" />
-                <p className="text-gray-400">info@indusfiresafety.com</p>
+                <a
+                  href="mailto:info@indusfiresafety.com?subject=Inquiry%20from%20Website&body=Hello,%0D%0A%0D%0AI%20would%20like%20to%20inquire%20about%20your%20services."
+                  className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+                >
+                  info@indusfiresafety.com
+                </a>
               </div>
             </div>
           </div>

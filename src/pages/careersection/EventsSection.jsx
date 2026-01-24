@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 
 
 const galleryImages = [
-  "http://209.182.233.237/images/careers1.jpg",
-  "http://209.182.233.237/images/careers2.jpg",
-  "http://209.182.233.237/images/careers3.jpg",
-  "http://209.182.233.237/images/careers4.jpg",
-  "http://209.182.233.237/images/careers5.jpg",
-  "http://209.182.233.237/images/careers6.jpg"
+  "/assets/image/careers1.jpg",
+  "/assets/image/careers2.jpg",
+  "/assets/image/careers3.jpg",
+  "/assets/image/careers4.jpg",
+  "/assets/image/careers5.jpg",
+  "/assets/image/careers6.jpg"
 ];
 
 const EventsSection = () => (
@@ -39,6 +39,10 @@ const EventsSection = () => (
               className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
               loading="eager"
               fetchPriority={index < 3 ? "high" : "auto"}
+              onError={(e) => {
+                console.error(`Failed to load career event image ${index + 1}:`, image);
+                e.target.onerror = null;
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center">
             </div>

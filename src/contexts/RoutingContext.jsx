@@ -11,26 +11,48 @@ export const useRouting = () => {
 };
 
 export const RoutingProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState('/');
+  // Initialize from URL path immediately to prevent showing wrong page on refresh
+  const getInitialPath = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname || '/';
+    }
+    return '/';
+  };
+
+  const [currentPage, setCurrentPage] = useState(getInitialPath());
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const navigate = (path) => {
     setCurrentPage(path);
     window.scrollTo(0, 0);
   };
 
-  // Initialize from URL hash if present (for backward compatibility)
+  // Initialize and handle browser back/forward buttons
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && hash !== '/') {
-      setCurrentPage(hash);
-    }
+    // Mark as initialized after first render
+    setIsInitialized(true);
+
+    // Handle browser back/forward buttons
+    const handlePopState = () => {
+      const newPath = window.location.pathname || '/';
+      setCurrentPage(newPath);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Update URL without changing the path
+  // Update URL with the current page path (only after initialization to avoid conflicts)
   useEffect(() => {
-    // Replace the URL without adding to history
-    window.history.replaceState(null, '', window.location.origin + window.location.pathname);
-  }, [currentPage]);
+    if (!isInitialized) return;
+    
+    // Update the URL to reflect the current page
+    const currentPath = window.location.pathname || '/';
+    if (currentPath !== currentPage) {
+      const newUrl = window.location.origin + (currentPage === '/' ? '' : currentPage);
+      window.history.pushState(null, '', newUrl);
+    }
+  }, [currentPage, isInitialized]);
 
   return (
     <RoutingContext.Provider value={{ currentPage, navigate }}>

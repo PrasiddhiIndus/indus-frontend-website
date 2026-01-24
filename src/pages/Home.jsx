@@ -21,6 +21,7 @@ const getSupabaseUrl = () => {
 const Home = () => {
   const [slides, setSlides] = useState([]);
   const [videoErrors, setVideoErrors] = useState(new Set());
+  const [isLoading, setIsLoading] = useState(true);
 
   // Function to handle video errors silently
   const handleVideoError = (videoUrl, slideIndex) => {
@@ -29,6 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchSliderData = async () => {
+      setIsLoading(true);
       const { data, error } = await supabase
         .from('slider_section')
         .select('*')
@@ -36,6 +38,7 @@ const Home = () => {
 
       if (error) {
         console.error("Error fetching slides:", error);
+        setIsLoading(false);
       } else {
         // Log the data to help debug
         console.log("Fetched slides data:", data);
@@ -68,35 +71,36 @@ const Home = () => {
         });
         
         setSlides(processedSlides);
+        setIsLoading(false);
       }
     };
 
     fetchSliderData();
   }, []);
 
-  // Show empty state if no slides
-  if (!slides || slides.length === 0) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Indus Fire Safety</h1>
-          <p className="text-gray-400 text-lg">Experience excellence in fire safety solutions</p>
-        </div>
-      </div>
-    );
-  }
+  // Show loading state if no slides yet, but still show the rest of the page
+  const hasSlides = slides && slides.length > 0;
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* Always render slider section first - show loading or slides */}
       <section className="relative w-full min-h-screen overflow-hidden">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          autoplay={{ delay: 8000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          loop={false} 
-          className="w-full h-screen"
-        >
-          {slides.map((slide, index) => {
+        {isLoading ? (
+          <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+              <p className="text-gray-400">Loading...</p>
+            </div>
+          </div>
+        ) : hasSlides ? (
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            autoplay={{ delay: 8000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            loop={false} 
+            className="w-full h-screen"
+          >
+            {slides.map((slide, index) => {
             // Check for different possible field names for media
             const videoUrl = slide.video_url || slide.video || slide.videoUrl;
             const imageUrl = slide.image_url || slide.image || slide.imageUrl || slide.url;
@@ -207,7 +211,19 @@ const Home = () => {
               </SwiperSlide>
             );
           })}
-        </Swiper>
+          </Swiper>
+        ) : (
+          <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
+            <div className="text-center px-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-white">
+                Welcome to Indus Fire Safety
+              </h1>
+              <p className="text-gray-400 text-lg sm:text-xl">
+                Experience excellence in fire safety solutions
+              </p>
+            </div>
+          </div>
+        )}
       </section>
 
       <HomeServices />

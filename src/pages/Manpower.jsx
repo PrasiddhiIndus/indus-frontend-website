@@ -8,9 +8,9 @@ import ServicesMarkets from './servicessection/ServicesMarkets';
 import ServicesContact from './servicessection/ServicesContact';
 
 // Manpower market images
-const img1 = 'http://209.182.233.237/images/manpower1.png';
-const img2 = 'http://209.182.233.237/images/manpower2.png';
-const img3 = 'http://209.182.233.237/images/manpower3.png';
+const img1 = '/assets/image/manpower1.png';
+const img2 = '/assets/image/manpower2.png';
+const img3 = '/assets/image/manpower3.png';
 
 const manpowerImages = [img1, img2, img3];
 const manpowerDescription =
@@ -19,47 +19,9 @@ const manpowerDescription =
 // All Manpower page images - preload these immediately
 const MANPOWER_IMAGES = [
   ...manpowerImages,
-  'http://209.182.233.237/images/manpower1.png', // From ManpowerServices component
+  '/assets/image/manpower1.png', // From ManpowerServices component
 ];
 
-// const manpowerServices = [
-//   {
-//     title: 'Skilled Technicians',
-//     description: 'Certified professionals with extensive industry experience',
-//     image: peopleImg,
-//     size: 'h-[500px]',
-//   },
-//   {
-//     title: 'Project Teams',
-//     description: 'Complete teams for large-scale project execution',
-//     image: peopleImg,
-//     size: 'h-[600px]',
-//   },
-//   {
-//     title: '24/7 Support',
-//     description: 'Round-the-clock availability for critical operations',
-//     image: peopleImg,
-//     size: 'h-[300px]',
-//   },
-//   {
-//     title: 'Safety Compliance',
-//     description: 'Fully compliant with industry safety standards',
-//     image: peopleImg,
-//     size: 'h-[420px]',
-//   },
-//   {
-//     title: 'Emergency Response',
-//     description: 'Trained teams for immediate disaster and fire handling',
-//     image: peopleImg,
-//     size: 'h-[300px]',
-//   },
-//   {
-//     title: 'Compliance Audit',
-//     description: 'Full safety compliance auditing and certification',
-//     image: peopleImg,
-//     size: 'h-[650px]',
-//   }
-// ];
 
 const Manpower = () => {
   const [services, setServices] = useState([]);
@@ -125,8 +87,8 @@ const Manpower = () => {
         title="Manpower Markets"
         description={manpowerDescription}
         images={manpowerImages} 
-      /> */}
-      <ServicesContact />
+      />
+      <ServicesContact /> */}
     </div>
   );
 };

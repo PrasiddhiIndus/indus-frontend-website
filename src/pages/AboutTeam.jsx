@@ -5,33 +5,20 @@ const team = [
   {
     name: 'Balu Nair',
     position: 'CEO & Founder',
-    image: 'http://209.182.233.237/images/Balusir.jpeg',
+    image: '/assets/image/Balusir.jpeg',
     description: '32+ years of industry experience leading major fire and safety solutions across India and around the world.',
   },
   {
     name: 'Sujith Menon',
     position: 'Technical Director',
-    // image: 'https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg',
     description: 'Expert in project management and operational excellence with MBA in Business Administration.',
   },
   {
     name: 'Vaisakh Nair',
     position: 'Operations Director',
-    // image: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg',
     description: 'Certified professional with specialization in industrial safety, Manpower and compliance.',
   },
-  // {
-  //   name: 'Rashmikant Vaghela ',
-  //   position: 'Chief Operating Officer',
-  //   image: 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg',
-  //   description: 'Engineering background with expertise in equipment management and technical solutions.',
-  // },
-  // {
-  //   name: 'Prahlad Singh',
-  //   position: 'Vice President - Technical',
-  //   image: 'https://images.pexels.com/photos/3184300/pexels-photo-3184300.jpeg',
-  //   description: 'Responsible for safety training programs and compliance certifications across regions.',
-  // },
+
 ];
 
 const AboutTeam = () => {

@@ -44,7 +44,7 @@ const HomeAbout = () => {
                 >
                     <div className="w-full h-[500px] md:h-[600px] rounded-lg overflow-hidden shadow-lg border border-white/10 backdrop-blur-md">
                         <img
-                            src="http://209.182.233.237/images/indusdrone.jpg"
+                            src="/assets/indusdrone.jpg"
                             alt="About Us"
                             className="w-full h-full object-cover rounded-lg"
                         />

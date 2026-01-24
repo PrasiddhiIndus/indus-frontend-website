@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import logo from '../../assets/image/website_logo.webp';
-import peopleImg from '../../assets/image/file_2025-05-21_11.02.15.png';
 
 const aboutData = {
   sectionTitle: "About Our Projects",
@@ -73,16 +71,21 @@ const ProjectServices = () => {
 
             <div className="row-span-2 overflow-hidden">
               <img
-                src={peopleImg}
+                src="/assets/image/projects11.png"
                 alt="Team"
                 className="w-full h-full object-cover shadow-md"
                 loading="lazy"
+                onError={(e) => {
+                  console.error('Failed to load projects image:', '/assets/image/projects11.png');
+                  e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMzMzMzMzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JbWFnZSBGYWlsZWQgdG8gTG9hZDwvdGV4dD4KPC9zdmc+';
+                  e.target.onerror = null;
+                }}
               />
             </div>
 
             <div className="bg-[#950101] flex items-center justify-center p-4">
               <img
-                src={logo}
+                src="/assets/website_logo.webp"
                 alt="Logo"
                 className="h-12 sm:h-16"
                 loading="lazy"
